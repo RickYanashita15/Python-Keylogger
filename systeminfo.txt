@@ -3,13 +3,18 @@ System: Darwin Darwin Kernel Version 22.2.0: Fri Nov 11 02:06:26 PST 2022; root:
 Machine: arm64
 Hostname: Ryunosukes-MacBook-Pro.local
 Private IP Address: 127.0.0.1
-Public IP Address: 24.165.20.6Processor: arm
-System: Darwin Darwin Kernel Version 22.2.0: Fri Nov 11 02:06:26 PST 2022; root:xnu-8792.61.2~4/RELEASE_ARM64_T8112
-Machine: arm64
+Public IP Address: 24.165.20.6Private IP Address: 127.0.0.1
 Hostname: Ryunosukes-MacBook-Pro.local
-Private IP Address: 127.0.0.1
-Public IP Address: 24.165.20.6Processor: arm
-System: Darwin Darwin Kernel Version 22.2.0: Fri Nov 11 02:06:26 PST 2022; root:xnu-8792.61.2~4/RELEASE_ARM64_T8112
 Machine: arm64
+System: Darwin Darwin Kernel Version 22.2.0: Fri Nov 11 02:06:26 PST 2022; root:xnu-8792.61.2~4/RELEASE_ARM64_T8112
+Processor: arm
+Public IP Address: 24.165.20.6Private IP Address: 127.0.0.1
 Hostname: Ryunosukes-MacBook-Pro.local
-Private IP Address: 127.0.0.1
+Machine: arm64
+System: Darwin Darwin Kernel Version 22.2.0: Fri Nov 11 02:06:26 PST 2022; root:xnu-8792.61.2~4/RELEASE_ARM64_T8112
+Processor: arm
+Public IP Address: 24.165.20.6Private IP Address: 127.0.0.1
+Hostname: Ryunosukes-MacBook-Pro.local
+Machine: arm64
+System: Darwin Darwin Kernel Version 22.2.0: Fri Nov 11 02:06:26 PST 2022; root:xnu-8792.61.2~4/RELEASE_ARM64_T8112
+Processor: arm
