@@ -4,3 +4,40 @@ Clipboard Data:
 https://stackoverflow.com/questions/1825692/can-python-send-text-to-the-mac-clipboard
 Clipboard Data: file_merge +
 Clipboard Data: file_merge +
+Clipboard Data: 
+Clipboard Data: 
+Clipboard Data: 
+Clipboard Data: from email.mime.base import MIMEBase
+Clipboard Data: Unhandled exception in listener callback
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/pynput/_util/__init__.py", line 228, in inner
+    return f(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/pynput/_util/darwin.py", line 265, in _handler
+    self._handle(proxy, event_type, event, refcon)
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/pynput/keyboard/_darwin.py", line 273, in _handle
+    self.on_release(key)
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/pynput/_util/__init__.py", line 144, in inner
+    if f(*args) is False:
+       ^^^^^^^^
+TypeError: on_release() takes 0 positional arguments but 1 was given
+Traceback (most recent call last):
+  File "/Users/rickyanashita/Developer/Python-Keylogger/logger.pyw", line 196, in <module>
+    listener.join()
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/pynput/_util/__init__.py", line 276, in join
+    six.reraise(exc_type, exc_value, exc_traceback)
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/six.py", line 718, in reraise
+    raise value.with_traceback(tb)
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/pynput/_util/__init__.py", line 228, in inner
+    return f(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/pynput/_util/darwin.py", line 265, in _handler
+    self._handle(proxy, event_type, event, refcon)
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/pynput/keyboard/_darwin.py", line 273, in _handle
+    self.on_release(key)
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/pynput/_util/__init__.py", line 144, in inner
+    if f(*args) is False:
+       ^^^^^^^^
+TypeError: on_release() takes 0 positional arguments but 1 was given
+Clipboard Data: all the other logging fu
+nctions. hopefully test g
