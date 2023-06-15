@@ -11,7 +11,7 @@ import socket
 import platform
 from requests import get
 
-#Copy cliboard module
+#Copy cliboard modules
 import subprocess
 
 #Microphone modules
