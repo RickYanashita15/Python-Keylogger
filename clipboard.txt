@@ -97,3 +97,5 @@ Clipboard Data: File "/Users/rickyanashita/Developer/Python-Keylogger/logger.pyw
     if lock.acquire(block, timeout):
        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 KeyboardInterrupt
+Clipboard Data: pip install auto-py-to-exe
+Clipboard Data: pip install auto-py-to-exe
