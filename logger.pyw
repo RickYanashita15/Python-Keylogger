@@ -12,7 +12,7 @@ import socket
 import platform
 from requests import get
 
-#Copy cliboard modules
+#Copy cliboard module
 import subprocess
 
 #Microphone modules
