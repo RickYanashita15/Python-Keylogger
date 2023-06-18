@@ -17,3 +17,22 @@ Through implementing this project, I learned how to:
 - Access system/device information through Python
 - Send an email to a Gmail address using Python and the SMTP server 587
 - Mess with macOS & Gmail security settings
+
+## Some Images of the keylog email and individual file contents
+
+The keylog email with description and attachments:
+<img width="1440" alt="Screenshot 2023-06-17 at 3 48 39 PM" src="https://github.com/RickYanashita15/Python-Keylogger/assets/65827502/7cf205ba-a61e-4a86-bfd5-abcc18cfdb85">
+
+The actual key_log.txt file: 
+<img width="869" alt="Screenshot 2023-06-17 at 3 49 36 PM" src="https://github.com/RickYanashita15/Python-Keylogger/assets/65827502/00b8995e-b6ea-4031-b769-d8a5debb418c">
+
+The system_information.txt file:
+<img width="1133" alt="Screenshot 2023-06-17 at 3 49 57 PM" src="https://github.com/RickYanashita15/Python-Keylogger/assets/65827502/70523c4d-88d0-4aeb-8d26-ab6f214c5e09">
+
+The clipboard_information.txt file: 
+<img width="1134" alt="Screenshot 2023-06-17 at 3 50 19 PM" src="https://github.com/RickYanashita15/Python-Keylogger/assets/65827502/4ddf4ff0-a662-4c32-b003-f0b0bdb1aeeb">
+
+
+
+
+
