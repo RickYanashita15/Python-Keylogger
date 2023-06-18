@@ -21,7 +21,8 @@ Through implementing this project, I learned how to:
 ## Some Images of the keylog email and individual file contents
 
 The keylog email with description and attachments:
-<img width="1440" alt="Screenshot 2023-06-17 at 3 48 39 PM" src="https://github.com/RickYanashita15/Python-Keylogger/assets/65827502/7cf205ba-a61e-4a86-bfd5-abcc18cfdb85">
+<img width="1440" alt="Screenshot 2023-06-17 at 3 54 12 PM" src="https://github.com/RickYanashita15/Python-Keylogger/assets/65827502/ca812b56-a469-4931-852c-5fd86aa803e9">
+
 
 The actual key_log.txt file: 
 <img width="869" alt="Screenshot 2023-06-17 at 3 49 36 PM" src="https://github.com/RickYanashita15/Python-Keylogger/assets/65827502/00b8995e-b6ea-4031-b769-d8a5debb418c">
